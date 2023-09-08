@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conference">
+          <Key>
+            <PropertyRef Name="conferenceID" />
+          </Key>
+          <Property Name="conferenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="conference_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="data" Type="date" />
+          <Property Name="venue" Type="nvarchar" MaxLength="50" />
+          <Property Name="scientificID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="countryID" />
+          </Key>
+          <Property Name="countryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Organizations">
+          <Key>
+            <PropertyRef Name="organizationsID" />
+          </Key>
+          <Property Name="organizationsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="organizations" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Scientific staff">
+          <Key>
+            <PropertyRef Name="scientificID" />
+          </Key>
+          <Property Name="scientificID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname_scientific" Type="nvarchar" MaxLength="50" />
+          <Property Name="name_scientific" Type="nvarchar" MaxLength="50" />
+          <Property Name="academic_degree" Type="nvarchar" MaxLength="50" />
+          <Property Name="countryID" Type="int" Nullable="false" />
+          <Property Name="organizationsID" Type="int" Nullable="false" />
+          <Property Name="topic_report" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Conference_Scientific staff">
+          <End Role="Scientific staff" Type="Self.Scientific staff" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scientific staff">
+              <PropertyRef Name="scientificID" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="scientificID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scientific staff_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Scientific staff" Type="Self.Scientific staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryID" />
+            </Principal>
+            <Dependent Role="Scientific staff">
+              <PropertyRef Name="countryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scientific staff_Organizations">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+          <End Role="Scientific staff" Type="Self.Scientific staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="organizationsID" />
+            </Principal>
+            <Dependent Role="Scientific staff">
+              <PropertyRef Name="organizationsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Conference" EntityType="Self.Conference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organizations" EntityType="Self.Organizations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scientific staff" EntityType="Self.Scientific staff" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Conference_Scientific staff" Association="Self.FK_Conference_Scientific staff">
+            <End Role="Scientific staff" EntitySet="Scientific staff" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scientific staff_Country" Association="Self.FK_Scientific staff_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Scientific staff" EntitySet="Scientific staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scientific staff_Organizations" Association="Self.FK_Scientific staff_Organizations">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Scientific staff" EntitySet="Scientific staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conference">
+          <Key>
+            <PropertyRef Name="conferenceID" />
+          </Key>
+          <Property Name="conferenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="conference_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <Property Name="venue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="scientificID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Scientific_staff" Relationship="Self.FK_Conference_Scientific_staff" FromRole="Conference" ToRole="Scientific_staff" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="countryID" />
+          </Key>
+          <Property Name="countryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scientific_staff" Relationship="Self.FK_Scientific_staff_Country" FromRole="Country" ToRole="Scientific_staff" />
+        </EntityType>
+        <EntityType Name="Organizations">
+          <Key>
+            <PropertyRef Name="organizationsID" />
+          </Key>
+          <Property Name="organizationsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="organizations1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Scientific_staff" Relationship="Self.FK_Scientific_staff_Organizations" FromRole="Organizations" ToRole="Scientific_staff" />
+        </EntityType>
+        <EntityType Name="Scientific_staff">
+          <Key>
+            <PropertyRef Name="scientificID" />
+          </Key>
+          <Property Name="scientificID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname_scientific" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name_scientific" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="academic_degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="countryID" Type="Int32" Nullable="false" />
+          <Property Name="organizationsID" Type="Int32" Nullable="false" />
+          <Property Name="topic_report" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Conference" Relationship="Self.FK_Conference_Scientific_staff" FromRole="Scientific_staff" ToRole="Conference" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Scientific_staff_Country" FromRole="Scientific_staff" ToRole="Country" />
+          <NavigationProperty Name="Organizations" Relationship="Self.FK_Scientific_staff_Organizations" FromRole="Scientific_staff" ToRole="Organizations" />
+        </EntityType>
+        <Association Name="FK_Conference_Scientific_staff">
+          <End Role="Scientific_staff" Type="Self.Scientific_staff" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scientific_staff">
+              <PropertyRef Name="scientificID" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="scientificID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scientific_staff_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Scientific_staff" Type="Self.Scientific_staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="countryID" />
+            </Principal>
+            <Dependent Role="Scientific_staff">
+              <PropertyRef Name="countryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scientific_staff_Organizations">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+          <End Role="Scientific_staff" Type="Self.Scientific_staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="organizationsID" />
+            </Principal>
+            <Dependent Role="Scientific_staff">
+              <PropertyRef Name="organizationsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Scientific_conferencesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conference" EntityType="Self.Conference" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Organizations" EntityType="Self.Organizations" />
+          <EntitySet Name="Scientific_staff" EntityType="Self.Scientific_staff" />
+          <AssociationSet Name="FK_Conference_Scientific_staff" Association="Self.FK_Conference_Scientific_staff">
+            <End Role="Scientific_staff" EntitySet="Scientific_staff" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scientific_staff_Country" Association="Self.FK_Scientific_staff_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Scientific_staff" EntitySet="Scientific_staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scientific_staff_Organizations" Association="Self.FK_Scientific_staff_Organizations">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Scientific_staff" EntitySet="Scientific_staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Scientific_conferencesEntities">
+          <EntitySetMapping Name="Conference">
+            <EntityTypeMapping TypeName="Model.Conference">
+              <MappingFragment StoreEntitySet="Conference">
+                <ScalarProperty Name="conferenceID" ColumnName="conferenceID" />
+                <ScalarProperty Name="conference_name" ColumnName="conference_name" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="scientificID" ColumnName="scientificID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="Model.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="country1" ColumnName="country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="Model.Organizations">
+              <MappingFragment StoreEntitySet="Organizations">
+                <ScalarProperty Name="organizationsID" ColumnName="organizationsID" />
+                <ScalarProperty Name="organizations1" ColumnName="organizations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scientific_staff">
+            <EntityTypeMapping TypeName="Model.Scientific_staff">
+              <MappingFragment StoreEntitySet="Scientific staff">
+                <ScalarProperty Name="scientificID" ColumnName="scientificID" />
+                <ScalarProperty Name="surname_scientific" ColumnName="surname_scientific" />
+                <ScalarProperty Name="name_scientific" ColumnName="name_scientific" />
+                <ScalarProperty Name="academic_degree" ColumnName="academic_degree" />
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="organizationsID" ColumnName="organizationsID" />
+                <ScalarProperty Name="topic_report" ColumnName="topic_report" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
