@@ -15,11 +15,20 @@ namespace Scientific_Conferences.BD
     
     public partial class Scientific_conferencesEntities : DbContext
     {
-        public Scientific_conferencesEntities()
+        private static Scientific_conferencesEntities _context;
+        public Scientific_conferencesEntities() 
             : base("name=Scientific_conferencesEntities")
         {
         }
-    
+        public static Scientific_conferencesEntities GetContext()
+        {
+            if(_context == null)
+            {
+                _context = new Scientific_conferencesEntities();
+            }
+            return _context;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

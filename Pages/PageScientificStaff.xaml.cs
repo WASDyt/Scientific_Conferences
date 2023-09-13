@@ -1,5 +1,4 @@
-﻿using Scientific_Conferences.BD;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,19 +16,13 @@ using System.Windows.Shapes;
 namespace Scientific_Conferences.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PageCountry.xaml
+    /// Логика взаимодействия для PageScientificStaff.xaml
     /// </summary>
-    public partial class PageCountry : Page
+    public partial class PageScientificStaff : Page
     {
-        public PageCountry()
+        public PageScientificStaff()
         {
             InitializeComponent();
-            dtgConference.ItemsSource = Scientific_conferencesEntities.GetContext().Conference.ToList();
-        }
-
-        public void frmMain_ContentRendered(object sender, EventArgs e)
-        {
-
         }
     }
 }

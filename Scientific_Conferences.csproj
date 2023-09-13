@@ -72,6 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BD\ClassFrame.cs" />
     <Compile Include="BD\Conference.cs">
       <DependentUpon>ModelSC.tt</DependentUpon>
     </Compile>
@@ -99,7 +100,6 @@
     <Compile Include="BD\Scientific_staff.cs">
       <DependentUpon>ModelSC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Classes\ClassFrame.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -108,10 +108,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PageScientificStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\PageCountry.xaml.cs">
       <DependentUpon>PageCountry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageScientificStaff.xaml.cs">
+      <DependentUpon>PageScientificStaff.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

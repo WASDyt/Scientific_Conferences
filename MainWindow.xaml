@@ -9,9 +9,9 @@
         Title="MainWindow" Height="720" Width="1280">
     <Grid>
         <Grid.RowDefinitions>
-        <RowDefinition Height="1*"/>
-        <RowDefinition Height="6*"/>
-        <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="0">
@@ -22,20 +22,14 @@
                             Style="{StaticResource StyleMenuButton}"
                             Click="update_Click"
                             Name="Update"/>
-            </StackPanel>
+        </StackPanel>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1">
-            <DataGrid Grid.Column="1"
-                  Name="dtgCountry"
-                  AutoGenerateColumns="False">
-                <DataGridTextColumn
-                Header="Название страны" Width="*"
-                Binding="{Binding Country.country}"/>
-            </DataGrid>
-            
-            
+
+
+
         </StackPanel>
-            <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Horizontal"
                     Grid.Row="2">
             <Button Content="Добавить"
                     Width="170"
@@ -59,5 +53,10 @@
                     Click="save_Click"
                     Name="Save"/>
         </StackPanel>
+        <Frame Grid.Row="1"
+               Name="frmMain"
+            ContentRendered="frmMain_ContentRendered"
+               NavigationUIVisibility="Hidden">
+        </Frame>
     </Grid>
 </Window>

@@ -6,15 +6,26 @@
       xmlns:local="clr-namespace:Scientific_Conferences.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageCountry">
-
+      Title="PageConference">
     <Grid>
         <DataGrid Grid.Column="1"
-                  Name="dtgCountry"
+                  Name="dtgConference"
                   AutoGenerateColumns="False">
-            <DataGridTextColumn
-                Header="Название страны" Width="*"
-                Binding="{Binding Country.country}"/>
+            <DataGrid.Columns>
+                <DataGridTextColumn  
+                Header="Название конференции" Width="*"
+                Binding="{Binding conference_name}"/>
+                <DataGridTextColumn  
+                Header="Дата проведения" Width="*"
+                Binding="{Binding data}"/>
+                <DataGridTextColumn  
+                Header="Адрес" Width="*"
+                Binding="{Binding venue}"/>
+                <DataGridTextColumn  
+                Header="Имя сотрудника" Width="*"
+                Binding="{Binding Scientific_staff.surname_scientific}"/>
+            </DataGrid.Columns>
         </DataGrid>
+        
     </Grid>
 </Page>

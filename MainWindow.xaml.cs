@@ -23,8 +23,8 @@ namespace Scientific_Conferences
         public MainWindow()
         {
             InitializeComponent();
-            Classes.ClassFrame.frmObj = frmMain;
-            Classes.ClassFrame.frmObj.Navigate(new Pages.PageCountry());
+            BD.ClassFrame.frmObj = frmMain;
+            BD.ClassFrame.frmObj.Navigate(new Pages.PageCountry());
         }
 
         private void update_Click(object sender, RoutedEventArgs e)
@@ -43,6 +43,11 @@ namespace Scientific_Conferences
         }
 
         private void save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void frmMain_ContentRendered(object sender, EventArgs e)
         {
 
         }
